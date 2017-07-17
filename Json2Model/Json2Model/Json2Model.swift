@@ -51,7 +51,7 @@ struct JSON {
             }
             
         default:
-            self.init(jsonObject: NSNull())
+            self.init(jsonObject: responseObject)
         }
     }
 
@@ -157,6 +157,37 @@ extension JSON{
         }
         
         return unwrapInternal(object)
+    }
+}
+
+extension JSON{
+    
+    var jsonArr : [JSON]{
+        if self.type == .array {
+            
+            let arrWithinJSON = self.innerArr.map({ (object) -> JSON in
+                return JSON.init(object)
+            })
+            
+            return arrWithinJSON
+        }else{
+            return []
+        }
+    }
+}
+
+extension JSON{
+    
+    var jsonDic : [String : JSON] {
+        if  self.type == .dictionary {
+            var dicWithJSON = [String : JSON].init(minimumCapacity: self.innerDic.count)
+            for (key,value) in self.innerDic {
+                dicWithJSON.updateValue(JSON.init(value), forKey: key)
+            }
+            return dicWithJSON
+        }else{
+            return [:]
+        }
     }
 }
 

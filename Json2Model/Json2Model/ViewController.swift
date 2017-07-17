@@ -27,7 +27,18 @@ class ViewController: UIViewController {
     }
     
     func initData() {
-        printWithTime(json.type)
+        
+        if json.type == .array {
+            
+            printWithTime(json.jsonArr.description)
+            
+            let innerOne = json.jsonArr[0]
+            
+//            if innerOne.type == .dictionary {
+//                innerOne.jsonDic
+//            }
+        }
+        
     }
 
 
