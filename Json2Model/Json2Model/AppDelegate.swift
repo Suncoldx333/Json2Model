@@ -16,19 +16,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        let navigationController = self.window?.rootViewController as! UINavigationController
-        let viewController = navigationController.topViewController as! ViewController
+        let vc = ViewController.self()
+        let nav = UINavigationController.init(rootViewController: vc)
+        self.window?.rootViewController = nav
         
-        if let file = Bundle.main.path(forResource: "Tests", ofType: "josn") {
+        if let file = Bundle.main.path(forResource: "Tests", ofType: "json") {
             do {
                 let data = try Data.init(contentsOf: URL.init(fileURLWithPath: file))
                 let json = JSON.init(data)
-                viewController.json = json
+                vc.json = json
             } catch  {
-                viewController.json = JSON.null
+                vc.json = JSON.null
             }
         }else{
-            viewController.json = JSON.null
+            vc.json = JSON.null
         }
         
         return true

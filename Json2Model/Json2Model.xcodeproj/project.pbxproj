@@ -16,6 +16,7 @@
 		18EEB4951F1C5862000DF974 /* Json2ModelUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EEB4941F1C5862000DF974 /* Json2ModelUITests.swift */; };
 		18EEB4A51F1C595B000DF974 /* Tests.json in Resources */ = {isa = PBXBuildFile; fileRef = 18EEB4A41F1C595B000DF974 /* Tests.json */; };
 		18EEB4A71F1C59E7000DF974 /* Json2Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EEB4A61F1C59E7000DF974 /* Json2Model.swift */; };
+		18EEB4A91F1C9A08000DF974 /* GloBalDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EEB4A81F1C9A08000DF974 /* GloBalDefine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		18EEB4961F1C5862000DF974 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18EEB4A41F1C595B000DF974 /* Tests.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Tests.json; sourceTree = "<group>"; };
 		18EEB4A61F1C59E7000DF974 /* Json2Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Json2Model.swift; sourceTree = "<group>"; };
+		18EEB4A81F1C9A08000DF974 /* GloBalDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GloBalDefine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 			children = (
 				18EEB4741F1C5862000DF974 /* AppDelegate.swift */,
 				18EEB4761F1C5862000DF974 /* ViewController.swift */,
+				18EEB4A81F1C9A08000DF974 /* GloBalDefine.swift */,
 				18EEB4A31F1C58A7000DF974 /* Demo */,
 				18EEB4A21F1C5893000DF974 /* Source */,
 				18EEB4781F1C5862000DF974 /* Main.storyboard */,
@@ -286,6 +289,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18EEB4A71F1C59E7000DF974 /* Json2Model.swift in Sources */,
+				18EEB4A91F1C9A08000DF974 /* GloBalDefine.swift in Sources */,
 				18EEB4771F1C5862000DF974 /* ViewController.swift in Sources */,
 				18EEB4751F1C5862000DF974 /* AppDelegate.swift in Sources */,
 			);

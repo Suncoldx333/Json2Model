@@ -59,21 +59,67 @@ struct JSON {
         self.innerObject = jsonObject
     }
     
+    
+    /// Inner objects
+    fileprivate var innerArr : [Any] = []
+    fileprivate var innerDic : [String : Any] = [:]
+    fileprivate var innerString : String = ""
+    fileprivate var innerNumber : NSNumber = 0
+    fileprivate var innerNull : NSNull = NSNull()
+    fileprivate var innerBool : Bool = false
+    
+    /// The tyoe of JSON
+    var type : Type = .null
+    
+    /// InnerObject in JSON
     var innerObject : Any{
         get{
-            return "1"
+            switch self.type {
+            case .array:
+                return self.innerArr
+            case .dictionary:
+                return self.innerDic
+            case .string:
+                return self.innerString
+            case .number:
+                return self.innerNumber
+            case .bool:
+                return self.innerBool
+            default:
+                return self.innerNull
+            }
         }
         set{
             switch unwrap(newValue) {
             case let number as NSNumber:
-                print("\(number)")
+                if number.isBool {
+                    type = .bool
+                    self.innerBool = number.boolValue
+                }else{
+                    type = .number
+                    self.innerNumber = number
+                }
+            case let string as String:
+                type = .string
+                self.innerString = string
+            case _ as NSNull:
+                type = .null
+            case nil:
+                type = .null
+            case let array as [Any]:
+                type = .array
+                self.innerArr = array
+            case let dic as [String : Any]:
+                type = .dictionary
+                self.innerDic = dic
             default:
-                print("none")
+                type = .unknown
             }
         }
     }
     
     
+    /// Static null JSON
     static var null : JSON{
         return JSON.init(NSNull())
     }
@@ -84,15 +130,38 @@ extension JSON{
     
     /// Unwrap the jsonObject
     ///
+    /// Impossible though it seems,this method may trigger stack overflow,where the object nests deeply enough.
+    /// But in RELEASE,stack overflow won't appear,with tail recursion
+    ///
     /// - Parameter object: jsonObject
     /// - Returns: unwraped jsonObject
     func unwrap(_ object : Any) -> Any {
-        switch object {
-        case let json as JSON:
-            return unwrap(json.innerObject)
-        default:
-            <#code#>
+        
+        func unwrapInternal(_ InnerObject : Any) -> Any{
+            switch InnerObject {
+            case let json as JSON:
+                return unwrapInternal(json)
+            case let array as [Any]:
+                return array.map({
+                    unwrapInternal($0)
+                })
+            case let dic as [String : Any]:
+                var unwrapDic = dic
+                for (k,v) in dic {
+                    unwrapDic[k] = unwrapInternal(v)
+                }
+                return unwrapDic
+            default:
+                return InnerObject
+            }
         }
+        
+        return unwrapInternal(object)
     }
 }
 
+extension NSNumber{
+    fileprivate var isBool : Bool{
+        return false
+    }
+}
