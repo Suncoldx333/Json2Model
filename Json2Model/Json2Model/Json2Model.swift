@@ -72,7 +72,7 @@ struct JSON {
     var type : Type = .null
     
     /// InnerObject in JSON
-    var innerObject : Any{
+    fileprivate var innerObject : Any{
         get{
             switch self.type {
             case .array:
@@ -126,6 +126,7 @@ struct JSON {
     
 }
 
+//MARK:---unwrap
 extension JSON{
     
     /// Unwrap the jsonObject
@@ -160,8 +161,10 @@ extension JSON{
     }
 }
 
+//MARK:---array
 extension JSON{
     
+    /// array contained JSON
     var jsonArr : [JSON]{
         if self.type == .array {
             
@@ -176,8 +179,10 @@ extension JSON{
     }
 }
 
+//MARK:---dictionay
 extension JSON{
     
+    /// dictionary contained (string,JSON)
     var jsonDic : [String : JSON] {
         if  self.type == .dictionary {
             var dicWithJSON = [String : JSON].init(minimumCapacity: self.innerDic.count)
